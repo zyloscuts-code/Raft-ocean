@@ -1,6 +1,7 @@
+
 name: RaftOcean
 version: 1.0.0
 main: com.example.raftocean.RaftOceanPlugin
-api-version: '1.21.11'
-author: OpenAI
-description: Ocean raft survival world with daily floating supply barrels.
+api-version: '1.21'
+author: RaftOcean
+description: A survival raft ocean adventure plugin
