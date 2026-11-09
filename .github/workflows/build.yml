@@ -1,1 +1,30 @@
-
+name: Build RaftOcean plugin
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract project ZIP if uploaded as an archive
+        run: |
+          if [ -f RaftOcean-Paper-1.21.11-source.zip ]; then
+            unzip -oq RaftOcean-Paper-1.21.11-source.zip
+          fi
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build plugin
+        working-directory: RaftOceanPaper
+        run: mvn -B clean package
+      - name: Upload plugin JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: RaftOcean-Paper-1.21.11
+          path: RaftOceanPaper/target/raft-ocean-1.0.0.jar
